@@ -37,7 +37,13 @@ count to zero and to increment it by one.
 30. Have the MusicOrganizer increment the play count of a track whenever it 
 is played via the playTrack method.
 
-public class 
+public class Track{
+...
+
+    public int getCount(){
+        return playCount;
+    }
+}
 
 
 public class MusicOrganizer{
@@ -53,7 +59,7 @@ public class MusicOrganizer{
             Track track = trackList.get(index);
             player.startPlaying(track.getFilename());
             track.incrementCount();
-            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + "Times played : " + track.getCount());
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + " - Times played : " + track.getCount());
         }
     }
 }
