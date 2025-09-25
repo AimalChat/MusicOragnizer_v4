@@ -15,7 +15,7 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
-    // 31
+    
 
     /**
      * Create a MusicOrganizer
@@ -41,6 +41,12 @@ public class MusicOrganizer
     public void addFile(String filename)
     {
         trackList.add(new Track(filename));
+    }
+    
+    public void favorite(int index){
+        Track track = trackList.get(index);
+        track.favorite();
+        
     }
     
     /**

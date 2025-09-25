@@ -15,6 +15,8 @@ public class Track
     private String filename;
     // Counter for number of times a track was played.
     private int playCount;
+    // Favorited flag.
+    private boolean favorite;
     
     /**
      * Constructor for objects of class Track.
@@ -25,6 +27,20 @@ public class Track
     public Track(String artist, String title, String filename)
     {
         setDetails(artist, title, filename);
+    }
+    
+    public void favorite(){
+        if(favorite == false){
+            favorite = true;
+            System.out.println(title + " : Added to favorites.");
+        }else{
+            favorite = false;
+            System.out.println(title + " : Removed from favorites.");
+        }
+    }
+    
+    public boolean favoriteFlag(int index){
+        return favorite;
     }
     
     public void resetCount(){
