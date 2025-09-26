@@ -69,7 +69,22 @@ to use this information in your version of the project; for instance, include
 it in a track’s details string, or allow it to be set via a method in the 
 MusicOrganizer class.
 
+    // Favorited flag.
+    private boolean favorite;
 
+    public void favorite(){
+        if(favorite == false){
+            favorite = true;
+            System.out.println(title + " : Added to favorites.");
+        }else{
+            favorite = false;
+            System.out.println(title + " : Removed from favorites.");
+        }
+    }
+    
+    public boolean favoriteFlag(int index){
+        return favorite;
+    }
 
 32. If you play two tracks without stopping the first one, both will play 
 simultaneously. This is not very useful. Change your program so that a playing 
@@ -130,5 +145,6 @@ completing this exercise, try using the debugger to see where things are going w
 
 39. Implement a method in your music organizer that lets you specify a string as a parameter, 
 and then removes all tracks whose titles contain that string.
+
 
 
