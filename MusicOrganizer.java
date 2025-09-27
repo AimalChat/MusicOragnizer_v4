@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A class to hold details of audio tracks.
@@ -15,7 +16,12 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
-    
+    //minimum of the number list
+    private int min;
+    //maximum of the number list
+    private int max;
+    //index of which number is currently being pointed to.
+    private int index;
 
     /**
      * Create a MusicOrganizer
@@ -91,6 +97,17 @@ public class MusicOrganizer
         System.out.println();
     }
     
+    public void removeTracksByTitle(String titleToRemove){
+        Iterator<Track> it = trackList.iterator();
+        while(it.hasNext()){
+            Track t = it.next();
+            String title = t.getTitle();
+            if(title.contains(titleToRemove)){//contains, not equals.
+                it.remove();
+            }
+        }
+    }
+    
     /**
      * List all tracks by the given artist.
      * @param artist The artist's name.
@@ -122,19 +139,66 @@ public class MusicOrganizer
     public void playTrack(int index)
     {
         if(validIndex(index)) {
+            //stop currently playing track, if one is being played.
+            stopPlaying();
             Track track = trackList.get(index);
             player.startPlaying(track.getFilename());
+            //increment current song's counter for amt played.
             track.incrementCount();
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + " - Times played : " + track.getCount());
-        }
+        }   
     }
 
+    /**
+     * For Q34.
+     */
+    public void multiplesOfFive(int min, int max){
+        index = 0;
+        while(index <= max){
+            System.out.println(index);
+            index = index + 5;
+        }
+    }
+    
+    /**
+     * For Q35 & 36.
+     */
+    public void printTotalSum(int min, int max){
+        index = min; //start counting from min.
+        int sum = 0; //sum is nothing. acts like a piggy bank.
+        while(index <= max){
+            sum = sum + index; //index is added to sum to increment.
+            index = index + 1; //index is min + 1(so first loop,1+1)
+        }
+        System.out.println(sum);
+    }
+    
     /**
      * Stop the player.
      */
     public void stopPlaying()
     {
         player.stop();
+    }
+    
+    /**
+     * For Q37
+     */
+    public boolean isPrime(int n){
+        boolean prime;
+        prime = true;
+        index = 0;
+        int divisor = 2;
+        while(divisor < (n-1)){
+            if(n % divisor == 0){
+                prime = false;
+                return prime;
+            }else{
+                divisor = divisor + 1;//the divisor.
+                index = index + 1;//number being counted, the dividend.
+            }
+        }
+        return prime;
     }
     
     /**
