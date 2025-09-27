@@ -204,7 +204,40 @@ execution of the loop. Then use the local variable in the loop’s condition rat
 the call to size. Check that this version gives the same results. If you have problems
 completing this exercise, try using the debugger to see where things are going wrong.
 
-
+    /**
+     * Find the index of the first file matching the given search string.
+     * @param searchString The string to match.
+     * @return The index of the first occurrence, or -1 if no match is found.
+     */
+    public int findFirst(String searchString)
+    {
+        int index = 0;
+        // Record that we will be searching until a match is found.
+        boolean searching = true;
+        //size of tracklist.
+        int trackSize;
+        trackSize = trackList.size();
+        while(searching && index < trackSize) {
+            Track aTrack = trackList.get(index);
+            String filename = aTrack.getFilename();
+            if(filename.contains(searchString)) {
+                // A match. We can stop searching.
+                searching = false;
+            }
+            else {
+                // Move on.
+                index++;
+            }
+        }
+        if(searching) {
+            // We didn't find it.
+            return -1;
+        }
+        else {
+            // Return where it was found.
+            return index;
+        }
+    }    
 
 39. Implement a method in your music organizer that lets you specify a string as a parameter, 
 and then removes all tracks whose titles contain that string.
@@ -219,6 +252,7 @@ and then removes all tracks whose titles contain that string.
             }
         }
     }
+
 
 
 
