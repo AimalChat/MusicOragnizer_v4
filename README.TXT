@@ -90,7 +90,22 @@ MusicOrganizer class.
 simultaneously. This is not very useful. Change your program so that a playing 
 track is automatically stopped when another track is started.
 
-
+    /**
+     * Play a track in the collection.
+     * @param index The index of the track to be played.
+     */
+    public void playTrack(int index)
+    {
+        if(validIndex(index)) {
+            //stop currently playing track, if one is being played.
+            stopPlaying();
+            Track track = trackList.get(index);
+            player.startPlaying(track.getFilename());
+            //increment current song's counter for amt played.
+            track.incrementCount();
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + " - Times played : " + track.getCount());
+        }   
+    }
 
 33. Suppose we express the first version of the key search in pseudo-code as follows:
 boolean missing = true;
@@ -145,6 +160,7 @@ completing this exercise, try using the debugger to see where things are going w
 
 39. Implement a method in your music organizer that lets you specify a string as a parameter, 
 and then removes all tracks whose titles contain that string.
+
 
 
 
