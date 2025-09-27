@@ -69,13 +69,43 @@ to use this information in your version of the project; for instance, include
 it in a track’s details string, or allow it to be set via a method in the 
 MusicOrganizer class.
 
+    // Favorited flag.
+    private boolean favorite;
 
+    public void favorite(){
+        if(favorite == false){
+            favorite = true;
+            System.out.println(title + " : Added to favorites.");
+        }else{
+            favorite = false;
+            System.out.println(title + " : Removed from favorites.");
+        }
+    }
+    
+    public boolean favoriteFlag(int index){
+        return favorite;
+    }
 
 32. If you play two tracks without stopping the first one, both will play 
 simultaneously. This is not very useful. Change your program so that a playing 
 track is automatically stopped when another track is started.
 
-
+    /**
+     * Play a track in the collection.
+     * @param index The index of the track to be played.
+     */
+    public void playTrack(int index)
+    {
+        if(validIndex(index)) {
+            //stop currently playing track, if one is being played.
+            stopPlaying();
+            Track track = trackList.get(index);
+            player.startPlaying(track.getFilename());
+            //increment current song's counter for amt played.
+            track.incrementCount();
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + " - Times played : " + track.getCount());
+        }   
+    }
 
 33. Suppose we express the first version of the key search in pseudo-code as follows:
 boolean missing = true;
@@ -86,9 +116,9 @@ missing = false;
 }
 Try to express the second version by completing the following outline:
 boolean found = false;
-while(. . .) {
+while(found != true) {
 if(the keys are in the next place) {
-...
+found = false;
 }
 }
 
@@ -97,17 +127,47 @@ if(the keys are in the next place) {
 34. Write a while loop (for example, in a method called multiplesOfFive) that prints out 
 all multiples of 5 between 10 and 95.
 
+//minimum of the number list
+private int min;
+//maximum of the number list
+private int max;
 
+//in this case, min = 10, max = 95.
+    public void multiplesOfFive(int min, int max){
+        int index = 0;
+        while(index <= max){
+            System.out.println(index);
+            index = index + 5;
+        }
+    }
 
 35. Write a while loop to sum the values 1 to 10 and print the sum once the loop has 
 finished.
 
-
+    public void printTotalSum(){
+        int min = 1;
+        int max = 10;
+        index = min; //start counting from min because min = 1.
+        int sum = 0; //starting sum is nothing, acts like a piggy bank.
+        while(index <= max){
+            sum = sum + index;
+            index = index + 1;
+        }
+        System.out.println(sum);
+    }
 
 36. Write a method called sum with a while loop that adds up all numbers between two 
 numbers a and b. The values for a and b can be passed to the sum method as parameters.
 
-
+    public void printTotalSum(int min, int max){
+        index = min; //start counting from min.
+        int sum = 0; //sum is nothing. acts like a piggy bank.
+        while(index <= max){
+            sum = sum + index;
+            index = index + 1;
+        }
+        System.out.println(sum);
+    }
 
 37. Challenge exercise Write a method isPrime(int n) that returns true if the parameter 
 n is a prime number, and false if it is not. To implement the method, you can write a while 
@@ -116,7 +176,25 @@ a whole number. You can write this test by using the modulo operator (%) to chec
 the integer division leaves a remainder of 0 (see the discussion of the modulo operator in 
 Section 3.12.3).
 
-
+    /**
+     * For Q37
+     */
+    public boolean isPrime(int n){
+        boolean prime;
+        prime = true;
+        index = 0;
+        int divisor = 2;
+        while(divisor < (n-1)){
+            if(n % divisor == 0){
+                prime = false;
+                return prime;
+            }else{
+                divisor = divisor + 1;//the divisor.
+                index = index + 1;//number being counted, the dividend.
+            }
+        }
+        return prime;
+    }
 
 38. In the findFirst method of MusicOrganizer, the loop’s condition repeatedly asks the 
 trackList collection how many tracks it is storing. Does the value returned by size vary 
@@ -130,5 +208,17 @@ completing this exercise, try using the debugger to see where things are going w
 
 39. Implement a method in your music organizer that lets you specify a string as a parameter, 
 and then removes all tracks whose titles contain that string.
+
+    public void removeTracksByTitle(String titleToRemove){
+        Iterator<Track> it = trackList.iterator();
+        while(it.hasNext()){
+            Track t = it.next();
+            String title = t.getTitle();
+            if(title.contains(titleToRemove)){//contains, not equals.
+                it.remove();
+            }
+        }
+    }
+
 
 
