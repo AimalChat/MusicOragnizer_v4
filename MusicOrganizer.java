@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * A class to hold details of audio tracks.
@@ -22,12 +23,15 @@ public class MusicOrganizer
     private int max;
     //index of which number is currently being pointed to.
     private int index;
+    //Random number generator
+    private Random randomGenerator;
 
     /**
      * Create a MusicOrganizer
      */
     public MusicOrganizer()
     {
+        randomGenerator = new Random();
         player = new MusicPlayer();
         reader = new TrackReader();
         trackList = reader.readTracks("../audio", ".mp3");
@@ -38,6 +42,44 @@ public class MusicOrganizer
             System.out.println("No tracks loaded.");
         }
         System.out.println();
+    }
+    
+    public void playRandomTrack()
+    {
+        int randomIndex;
+        if(trackList.size() > 0){
+            randomIndex = randomGenerator.nextInt(trackList.size());
+            //stop currently playing track, if one is being played.
+            stopPlaying();
+            Track track = trackList.get(randomIndex);
+            player.startPlaying(track.getFilename());
+            //increment current song's counter for amt played.
+            track.incrementCount();
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + " - Times played : " + track.getCount());
+        }
+    }
+    
+    public void ShufflePlayAllTracks()
+    {
+        int randomIndex;
+        //copy of original playlist.
+        ArrayList<Track> copyOfTrackList = new ArrayList<Track>(trackList);
+        //New randomized tracklist.
+        ArrayList<Track> randomizedTrackList = new ArrayList<Track>();
+        while(copyOfTrackList.size() > 0){
+            randomIndex = randomGenerator.nextInt(copyOfTrackList.size());
+            Track randomTrack = copyOfTrackList.get(randomIndex);
+            randomizedTrackList.add(randomTrack);
+            copyOfTrackList.remove(randomIndex);
+        }
+        for(Track track : randomizedTrackList){
+            //Stop playing current track to play next one.
+            stopPlaying();
+            player.startPlaying(track.getFilename());
+            //increment current song's counter for amt played.
+            track.incrementCount();
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle() + " - Times played : " + track.getCount());
+        }
     }
     
     /**
@@ -52,7 +94,6 @@ public class MusicOrganizer
     public void favorite(int index){
         Track track = trackList.get(index);
         track.favorite();
-        
     }
     
     /**
