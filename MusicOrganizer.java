@@ -141,8 +141,7 @@ public class MusicOrganizer
     public void removeTracksByTitle(String titleToRemove){
         Iterator<Track> it = trackList.iterator();
         while(it.hasNext()){
-            Track t = it.next();
-            String title = t.getTitle();
+            String title = it.next().getTitle();
             if(title.contains(titleToRemove)){//contains, not equals.
                 it.remove();
             }
@@ -237,6 +236,7 @@ public class MusicOrganizer
             }else{
                 divisor = divisor + 1;//the divisor.
                 index = index + 1;//number being counted, the dividend.
+                //NOT used anywhere else.
             }
         }
         return prime;
