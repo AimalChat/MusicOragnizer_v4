@@ -194,7 +194,7 @@ public class MusicOrganizer
      * For Q34.
      */
     public void multiplesOfFive(int min, int max){
-        index = 0;
+        index = min;
         while(index <= max){
             System.out.println(index);
             index = index + 5;
