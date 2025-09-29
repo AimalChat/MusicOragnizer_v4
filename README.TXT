@@ -246,12 +246,13 @@ and then removes all tracks whose titles contain that string.
         Iterator<Track> it = trackList.iterator();
         while(it.hasNext()){
             Track t = it.next();
-            String title = t.getTitle();
+            String title = t.getTitle(); //Or String title = it.next().getTitle(); 
             if(title.contains(titleToRemove)){//contains, not equals.
                 it.remove();
             }
         }
     }
+
 
 
 
