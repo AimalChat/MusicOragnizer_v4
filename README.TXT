@@ -116,9 +116,9 @@ missing = false;
 }
 Try to express the second version by completing the following outline:
 boolean found = false;
-while(found != true) {
-if(the keys are in the next place) {
-found = false;
+while(found != true) {//!found, found == false are both equivilant. ! means different from.
+if(the keys are in the next place) {//they are found.
+found = true;
 }
 }
 
@@ -134,7 +134,7 @@ private int max;
 
 //in this case, min = 10, max = 95.
     public void multiplesOfFive(int min, int max){
-        int index = 0;
+        int index = min;//
         while(index <= max){
             System.out.println(index);
             index = index + 5;
@@ -150,8 +150,8 @@ finished.
         index = min; //start counting from min because min = 1.
         int sum = 0; //starting sum is nothing, acts like a piggy bank.
         while(index <= max){
-            sum = sum + index;
-            index = index + 1;
+            sum = sum + index;//so could do sum =+ index.
+            index = index + 1;//or value++, value+=1.
         }
         System.out.println(sum);
     }
@@ -182,15 +182,15 @@ Section 3.12.3).
     public boolean isPrime(int n){
         boolean prime;
         prime = true;
-        index = 0;
+        index = 0;//it was a field
         int divisor = 2;
         while(divisor < (n-1)){
             if(n % divisor == 0){
                 prime = false;
-                return prime;
+                return prime;//stops if not 
             }else{
                 divisor = divisor + 1;//the divisor.
-                index = index + 1;//number being counted, the dividend.
+                index = index + 1;//number being counted, the dividend.//not necessary, since index not used anywhere else.
             }
         }
         return prime;
@@ -252,6 +252,7 @@ and then removes all tracks whose titles contain that string.
             }
         }
     }
+
 
 
 
